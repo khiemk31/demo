@@ -12,10 +12,10 @@ export default function HighlightExample({example}) {
   const [wordData, setWordData] = useState(wordArray);
 
   const getSelectionData = (event, content, start, end) => {
-    // const color = highlightColor(event);
+    const color = highlightColor(event);
     setWordData(
       wordData.map(word =>
-        word.start >= start && word.end <= end ? {...word, color: event} : word,
+        word.start >= start && word.end <= end ? {...word, color: color} : word,
       ),
     );
   };
@@ -41,9 +41,9 @@ export default function HighlightExample({example}) {
     <View style={styles.container}>
       <View style={{alignItems: 'center'}}>
         <SelectableText
-          menuItems={['Đỏ']}
+          menuItems={['Đỏ', 'Vàng', 'Đen']}
           onSelection={({eventType, content, selectionStart, selectionEnd}) => {
-            getSelectionData('#ff0000', content, selectionStart, selectionEnd);
+            getSelectionData(eventType, content, selectionStart, selectionEnd);
           }}
           TextComponent={renderSubstring}
           style={styles.paragraph}
