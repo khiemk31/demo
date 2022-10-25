@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 const listLyrics = [
   {id: 0, lyric: 'Ta mang cho em 1 đoá quỳnh'},
-  {id: 1, lyric: 'Quỳnh Thơm hay môi em thơ'},
+  {id: 1, lyric: 'Quỳnh Thơm hay môi em thơm'},
   {id: 2, lyric: 'Em mang cho ra 1 chút tình '},
   {id: 3, lyric: 'Miệng cười khúc khích trên lưng'},
   {id: 4, lyric: 'Đêm này đêm'},
