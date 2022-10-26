@@ -1,29 +1,35 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-
+import {DragResizeBlock} from 'react-native-drag-resize';
 export default function Animation(props) {
+  const [resize, setResize] = useState(50);
   return (
     <View style={styles.container}>
       {props.listLocation.map(location => {
         return (
-          <>
-            <View
-              style={[
-                styles.containerHighlight,
-                {
-                  top: location.y,
-                  marginLeft: 10 + 90 * Number(location.id % 6),
-                },
-              ]}>
-              <Text
-                style={[styles.txtTitleNote]}
-                onPress={() => {
-                  console.log('Nhajap teen nhap ten');
-                }}>
-                Nhập tên
-              </Text>
-            </View>
-          </>
+          <View
+            style={{
+              position: 'absolute',
+              top: location.y,
+              marginLeft: 10 + 90 * Number(location.id % 6),
+            }}>
+            <DragResizeBlock
+              isDraggable={false}
+              key={location.id}
+              y={70}
+              h={50}
+              onResize={value => setResize(value)}>
+              <View style={[styles.containerHighlight]}>
+                <Text
+                  style={[styles.txtTitleNote]}
+                  onPress={() => {
+                    console.log('Nhập tên');
+                  }}>
+                  Nhập tên
+                </Text>
+              </View>
+            </DragResizeBlock>
+          </View>
         );
       })}
     </View>
@@ -46,9 +52,8 @@ const styles = StyleSheet.create({
     top: -20,
   },
   containerHighlight: {
-    position: 'absolute',
-    width: 60,
-    height: 100,
+    width: '100%',
+    height: '100%',
     backgroundColor: 'red',
   },
 });
