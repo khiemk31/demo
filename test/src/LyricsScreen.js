@@ -10,27 +10,31 @@ const listLyrics = [
   {id: 5, lyric: 'Buồn bã với những môi hôn'},
   {id: 6, lyric: 'Trong vườn trăng'},
   {id: 7, lyric: 'Vừa khép những đóa mong manh'},
+  {id: 8, lyric: 'Vừa khép những đóa mong manh'},
+  {id: 9, lyric: 'Vừa khép những đóa mong manh'},
+  {id: 10, lyric: 'Vừa khép những đóa mong manh'},
+  {id: 11, lyric: 'Vừa khép những đóa mong manh'},
+  {id: 12, lyric: 'Vừa khép những đóa mong manh'},
 ];
 
 export default function LyricsScreen(props) {
   const [listLocationY, setLocationY] = useState([]);
   const [location, setLocation] = useState('');
 
+  useEffect(() => {
+    if (location != '' && location != null && location != undefined) {
+      props.setLocation(location);
+    }
+  }, [location]);
+
   function getLocation(id, x, y) {
-    var location1 = {
+    var location = {
       id: id,
       x: x * Number(id),
       y: y,
     };
-    setLocation(location1);
-    if (location != '' && location != null && location != undefined) {
-      sendLocation(location);
-    }
+    setLocation(location);
   }
-
-  const sendLocation = location => {
-    props.setLocation(location);
-  };
   return (
     <View style={styles.container}>
       {listLyrics.map(map => {
@@ -40,11 +44,11 @@ export default function LyricsScreen(props) {
             key={map.id}
             onLayout={event => {
               var {x, y, width, height} = event.nativeEvent.layout;
-              var locationY = Number(y) - Number(height);
-              setLocationY(listLocationY => [...listLocationY, locationY]);
+              // var locationY = Number(y) - Number(height);
+              setLocationY(listLocationY => [...listLocationY, y]);
             }}
             onPress={() => {
-              getLocation(map.id, 20, listLocationY[map.id]);
+              getLocation(map.id, 60, listLocationY[map.id]);
             }}>
             <Text style={styles.textLyrics}>{map.lyric}</Text>
           </TouchableOpacity>

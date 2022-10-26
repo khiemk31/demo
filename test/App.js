@@ -1,12 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import Animation from './src/AnimationScreen';
 import LyricsScreen from './src/LyricsScreen';
 
 export default function App() {
-  const [location, setLocation] = useState('');
+  const [listLocation, setListLocation] = useState([]);
   const getLocation = location => {
-    setLocation(location);
+    if (listLocation.length > 0) {
+      for (item of listLocation) {
+        if (item.id != location.id) {
+          setListLocation([...listLocation, location]);
+        } else {
+          console.log('Trùng rồi');
+        }
+      }
+    } else {
+      setListLocation([location]);
+    }
   };
 
   return (
@@ -15,7 +25,7 @@ export default function App() {
         <LyricsScreen setLocation={getLocation} />
       </View>
       <View style={{width: '50%', flex: 1}}>
-        <Animation location={location} />
+        <Animation listLocation={listLocation} />
       </View>
     </View>
   );

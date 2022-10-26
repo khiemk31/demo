@@ -1,33 +1,31 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 
 export default function Animation(props) {
   return (
     <View style={styles.container}>
-      {props.location != '' &&
-      props.location != null &&
-      props.location != undefined ? (
-        <>
-          <TextInput
-            placeholder="Nhập tên"
-            style={[
-              styles.inputTxt,
-              {top: props.location.y - 20, marginLeft: props.location.x + 30},
-            ]}
-          />
-          <View
-            style={[
-              styles.containerHighlight,
-              {
-                marginTop: props.location.y,
-                marginLeft: props.location.x,
-              },
-            ]}
-          />
-        </>
-      ) : (
-        <></>
-      )}
+      {props.listLocation.map(location => {
+        return (
+          <>
+            <View
+              style={[
+                styles.containerHighlight,
+                {
+                  top: location.y,
+                  marginLeft: 10 + 90 * Number(location.id % 6),
+                },
+              ]}>
+              <Text
+                style={[styles.txtTitleNote]}
+                onPress={() => {
+                  console.log('Nhajap teen nhap ten');
+                }}>
+                Nhập tên
+              </Text>
+            </View>
+          </>
+        );
+      })}
     </View>
   );
 }
@@ -37,20 +35,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f3ff',
     padding: 30,
+    textAlign: 'center',
   },
-  inputTxt: {
+  txtTitleNote: {
+    textAlign: 'center',
     position: 'absolute',
     width: 60,
-    flex: 1,
     color: '#000',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#044579',
+    fontSize: 14,
+    top: -20,
   },
   containerHighlight: {
-    position: 'relative',
+    position: 'absolute',
     width: 60,
-    height: 40,
+    height: 100,
     backgroundColor: 'red',
   },
 });
